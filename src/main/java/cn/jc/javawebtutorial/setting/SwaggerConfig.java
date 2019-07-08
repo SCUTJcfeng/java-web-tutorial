@@ -20,9 +20,6 @@ public class SwaggerConfig {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
                 .apis(RequestHandlerSelectors.basePackage("cn.jc.javawebtutorial")).paths(PathSelectors.any()).build();
-        // return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-        // .apis(RequestHandlerSelectors.basePackage("cn.jc.javawebtutorial.rest")).paths(PathSelectors.any())
-        // .build();
     }
 
     private ApiInfo apiInfo() {
