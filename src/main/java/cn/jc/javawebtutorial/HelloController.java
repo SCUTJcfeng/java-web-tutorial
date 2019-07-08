@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 
 import java.time.Instant;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +25,7 @@ public class HelloController {
         return "hello world!";
     }
 
-    @RequestMapping(value = "/timestamp", method = RequestMethod.GET)
+    @RequestMapping(value = "/timestamp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getServerInfo() {
         Map<String, Object> m = new HashMap<>();
         m.put("timestamp", Instant.now().getEpochSecond());
