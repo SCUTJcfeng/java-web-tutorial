@@ -20,9 +20,8 @@ public class HelloController {
 
     @RequestMapping("/timestamp")
     public String getServerInfo() {
-        Map<String, Object> m = new HashMap<String, Object>();
-        Long t = Instant.now().getEpochSecond();
-        m.put("timestamp", t);
+        Map<String, Object> m = new HashMap<>();
+        m.put("timestamp", Instant.now().getEpochSecond());
         return JSON.toJSONString(m);
     }
 }
