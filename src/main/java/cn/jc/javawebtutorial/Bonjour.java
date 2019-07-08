@@ -13,6 +13,11 @@ public class Bonjour {
         return "Get Bonjour Method";
     }
 
+    @RequestMapping(value = "/bon", method = RequestMethod.GET)
+    public String getBon() {
+        return "Get bonjour/bon Method";
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public String postMethod() {
         return "Post Bonjour Method";
