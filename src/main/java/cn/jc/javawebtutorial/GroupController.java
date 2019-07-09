@@ -1,6 +1,8 @@
 package cn.jc.javawebtutorial;
 
 import java.util.List;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
 import com.alibaba.fastjson.JSON;
@@ -33,15 +35,18 @@ class User {
         return age;
     }
 
+    @Deprecated
     public void setName(String name) {
         this.name = name;
     }
 
+    @Deprecated
     public void setAge(Integer age) {
         this.age = age;
     }
 }
 
+@GroupInfo(name = "group A", id = 10001)
 class Group {
 
     private Integer id;
@@ -83,7 +88,18 @@ public class GroupController {
         g.setName("group A");
         g.addUser(createUser("jack", 18));
         g.addUser(createUser("jackson", 15));
+        checkGroupAnnotation();
         return JSON.toJSONString(g);
+    }
+
+    private void checkGroupAnnotation() {
+        Boolean bool = Group.class.isAnnotationPresent(GroupInfo.class);
+        System.out.println("Group class has GroupInfo Annotation is " + bool);
+        if (bool) {
+            GroupInfo g = Group.class.getAnnotation(GroupInfo.class);
+            System.out.println("name: " + g.name());
+            System.out.println("id: " + g.id());
+        }
     }
 
     private User createUser(String name, Integer age) {
@@ -92,4 +108,11 @@ public class GroupController {
         user.setName(name);
         return user;
     }
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface GroupInfo {
+    String name() default "name";
+
+    int id() default 1;
 }
