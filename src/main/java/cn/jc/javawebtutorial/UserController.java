@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-class User implements Serializable {
+class VipUser implements Serializable {
 
     @JSONField(name = "name")
     private String name;
@@ -25,12 +25,12 @@ class User implements Serializable {
     private Map<String, Object> map = new HashMap<>();
     private static final long serialVersionUID = 1L;
 
-    public User(String name, Integer age) {
+    public VipUser(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
 
-    public User() {
+    public VipUser() {
 
     }
 
@@ -67,9 +67,9 @@ public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String getUserList() {
-        ArrayList<User> list = new ArrayList<>();
-        list.add(new User("jack", 18));
-        list.add(new User("jackson", 11));
+        ArrayList<VipUser> list = new ArrayList<>();
+        list.add(new VipUser("jack", 18));
+        list.add(new VipUser("jackson", 11));
         return JSON.toJSONString(list);
     }
 }
