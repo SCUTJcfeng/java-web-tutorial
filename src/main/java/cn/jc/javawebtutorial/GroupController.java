@@ -1,13 +1,9 @@
 package cn.jc.javawebtutorial;
 
 import java.util.List;
-// import java.io.Serializable;
 import java.util.ArrayList;
-// import java.util.HashMap;
-// import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-// import com.alibaba.fastjson.annotation.JSONField;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,11 +84,6 @@ public class GroupController {
         g.addUser(createUser("jack", 18));
         g.addUser(createUser("jackson", 15));
         return JSON.toJSONString(g);
-
-        // ArrayList<User> list = new ArrayList<>();
-        // list.add(new User("jack", 18));
-        // list.add(new User("jackson", 11));
-        // return JSON.toJSONString(list);
     }
 
     private User createUser(String name, Integer age) {
