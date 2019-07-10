@@ -1,4 +1,4 @@
-package cn.jc.javawebtutorial.setting;
+package cn.jc.javawebtutorial.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

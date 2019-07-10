@@ -1,4 +1,7 @@
 debug: false
+server:
+  port: 8888
+  address: 127.0.0.1
 spring:
   redis:
     host: 127.0.0.1
