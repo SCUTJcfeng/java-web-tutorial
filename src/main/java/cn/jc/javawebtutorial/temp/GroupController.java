@@ -1,12 +1,10 @@
-package cn.jc.javawebtutorial;
+package cn.jc.javawebtutorial.temp;
 
 import java.util.List;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-
 import com.alibaba.fastjson.JSON;
-
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,6 +44,7 @@ class User {
     }
 }
 
+
 @GroupInfo(name = "group A", id = 10001)
 class Group {
 
@@ -78,10 +77,12 @@ class Group {
     }
 }
 
+
 @RestController
 public class GroupController {
 
-    @RequestMapping(value = "/group", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/group", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String getUserList() {
         Group g = new Group();
         g.setId(1);
@@ -109,6 +110,7 @@ public class GroupController {
         return user;
     }
 }
+
 
 @Retention(RetentionPolicy.RUNTIME)
 @interface GroupInfo {

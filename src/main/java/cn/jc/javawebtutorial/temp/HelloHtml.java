@@ -1,4 +1,4 @@
-package cn.jc.javawebtutorial;
+package cn.jc.javawebtutorial.temp;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
