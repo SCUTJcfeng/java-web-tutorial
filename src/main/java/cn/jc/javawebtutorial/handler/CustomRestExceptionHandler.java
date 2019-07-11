@@ -1,6 +1,7 @@
 package cn.jc.javawebtutorial.handler;
 
 import org.apache.logging.log4j.Logger;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import cn.jc.javawebtutorial.api.ApiError;
@@ -22,6 +25,13 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         String messString = ex.getLocalizedMessage();
         logger.error(messString);
         return messString;
+    }
+
+    @ExceptionHandler(value = ArithmeticException.class)
+    @ResponseBody
+    public ApiError keyErrorHandler(HttpServletRequest req, ArithmeticException e) {
+        return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, getLocalizedMessage(e),
+                e.getLocalizedMessage() + " ArithmeticException error");
     }
 
     @Override
