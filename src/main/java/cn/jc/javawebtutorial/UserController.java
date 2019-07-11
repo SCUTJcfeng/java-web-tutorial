@@ -7,6 +7,7 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -83,7 +84,12 @@ public class UserController {
 class UserInfoController {
 
     @Autowired
+    @Qualifier("UserInfoService")
     private UserInfoService userInfoService;
+
+    @Autowired
+    @Qualifier("UserInfoService2")
+    private UserInfoService userInfoService2;
 
     @RequestMapping(value = "/userinfo", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -95,9 +101,9 @@ class UserInfoController {
         user.setAge(age);
         user.setGender(gender);
         // return JSON.toJSONString(user);
-        Integer newAge = userInfoService.getUserAge(user);
-        String newName = userInfoService.getUserName(user);
-        Boolean newGender = userInfoService.getUserGender(user);
+        Integer newAge = userInfoService2.getUserAge(user);
+        String newName = userInfoService2.getUserName(user);
+        Boolean newGender = userInfoService2.getUserGender(user);
         Map<String, Object> m = new HashMap<>();
         m.put("name", newName);
         m.put("age", newAge);
