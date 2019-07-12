@@ -1,4 +1,4 @@
-package cn.jc.javawebtutorial.controller;
+package cn.jc.javawebtutorial.temp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

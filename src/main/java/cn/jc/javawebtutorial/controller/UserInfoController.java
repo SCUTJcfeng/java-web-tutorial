@@ -13,6 +13,7 @@ import cn.jc.javawebtutorial.service.UserInfoService;
 
 
 @RestController
+@RequestMapping("/user")
 public class UserInfoController {
 
     @Autowired

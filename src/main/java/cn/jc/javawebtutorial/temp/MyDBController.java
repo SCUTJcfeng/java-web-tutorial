@@ -1,4 +1,4 @@
-package cn.jc.javawebtutorial.controller;
+package cn.jc.javawebtutorial.temp;
 
 import java.util.List;
 import java.util.Map;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @RestController
@@ -16,7 +17,7 @@ public class MyDBController {
     private JdbcTemplate jdbcTemplate;
 
 
-    @RequestMapping("/db")
+    @RequestMapping(value = "/db", method = RequestMethod.GET)
     public String getDB() {
         String sql = "SELECT `exchange`, `symbol` from `kline` LIMIT 5";
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
