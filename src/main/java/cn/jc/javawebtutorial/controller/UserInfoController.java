@@ -1,6 +1,7 @@
 package cn.jc.javawebtutorial.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import cn.jc.javawebtutorial.modal.UserModal;
+// import cn.jc.javawebtutorial.repository.UserRepository;
 import cn.jc.javawebtutorial.service.UserInfoService;
 
 
@@ -25,9 +27,32 @@ public class UserInfoController {
     @Qualifier("UserInfoService2")
     private UserInfoService userInfoService2;
 
-    @RequestMapping(value = "/userinfo", method = RequestMethod.GET,
+    // @Autowired
+    // private UserRepository userRepository;
+
+    @RequestMapping(value = "/getUser", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String getUserInfo(@RequestParam(value = "name", required = true) String name,
+    public String getUserInfo(@RequestParam(value = "name", required = true) String name) {
+        List<UserModal> list = userInfoService.getUser(name);
+        return JSON.toJSONString(list);
+    }
+
+    @RequestMapping(value = "/addUser", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String addUser(@RequestParam(value = "name", required = true) String name,
+            @RequestParam(value = "age", required = true) Integer age,
+            @RequestParam(value = "gender", required = true) Boolean gender) {
+        UserModal user = new UserModal();
+        user.setAge(age);
+        user.setName(name);
+        user.setGender(gender);
+        UserModal userNew = userInfoService.addUser(user);
+        return JSON.toJSONString(userNew);
+    }
+
+    @RequestMapping(value = "/userinfo2", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String getUserInfo2(@RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "age", required = true) Integer age,
             @RequestParam(value = "gender", required = true) Boolean gender) {
         UserModal user = new UserModal();
