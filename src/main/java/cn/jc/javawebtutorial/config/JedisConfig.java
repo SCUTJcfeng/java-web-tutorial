@@ -3,21 +3,14 @@ package cn.jc.javawebtutorial.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
-
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
-class Config {
+public class JedisConfig {
 
     @Autowired
     RedisConfig r;
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 
     @Bean
     public JedisPool redisPoolFactory() throws Exception {
@@ -31,6 +24,7 @@ class Config {
         System.out.println(r.getHost());
         System.out.println(r.getPort());
         System.out.println(r.getDatabase());
-        return new JedisPool(jedisPoolConfig, r.getHost(), r.getPort(), r.getTimeout(), r.getPassword());
+        return new JedisPool(jedisPoolConfig, r.getHost(), r.getPort(), r.getTimeout(),
+                r.getPassword());
     }
 }
