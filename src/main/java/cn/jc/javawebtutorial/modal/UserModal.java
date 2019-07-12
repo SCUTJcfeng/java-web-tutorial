@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import lombok.Data;
 
 @Entity
@@ -30,10 +28,4 @@ public class UserModal {
     @NotNull
     @Column()
     private Boolean gender;
-
-    @Modifying
-    @Query("INSERT INTO `test_user` ")
-    public Boolean addUser(UserModal user) {
-        return true;
-    }
 }

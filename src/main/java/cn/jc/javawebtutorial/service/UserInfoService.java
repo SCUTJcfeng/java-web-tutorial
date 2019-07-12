@@ -4,13 +4,11 @@ import java.util.List;
 import cn.jc.javawebtutorial.modal.UserModal;
 
 public interface UserInfoService {
-    public String getUserName(UserModal user);
+    List<UserModal> getUserByName(String name);
 
-    public Integer getUserAge(UserModal user);
+    UserModal getUserById(Long id);
 
-    public Boolean getUserGender(UserModal user);
+    List<UserModal> getUserByGender(Boolean gender);
 
-    public List<UserModal> getUser(String name);
-
-    public UserModal addUser(UserModal user);
+    UserModal addUser(UserModal user);
 }
