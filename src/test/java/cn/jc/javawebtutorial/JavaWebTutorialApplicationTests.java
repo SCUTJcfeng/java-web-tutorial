@@ -8,10 +8,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import cn.jc.javawebtutorial.modal.UserModal;
 import cn.jc.javawebtutorial.util.HttpUtil;
 import cn.jc.javawebtutorial.util.JsonUtil;
+import cn.jc.javawebtutorial.util.MapUtil;
 import static org.junit.Assert.assertNotNull;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,12 +23,6 @@ public class JavaWebTutorialApplicationTests {
     @Autowired
     private HttpUtil httpUtil;
 
-    private UserModal convertMapToUser(Map<String, Object> m) {
-        ObjectMapper mapper = new ObjectMapper();
-        UserModal user = mapper.convertValue(m, UserModal.class);
-        return user;
-    }
-
     private Boolean checkUserInfoNull(UserModal user) {
         assertNotNull(user.getName());
         assertNotNull(user.getGender());
@@ -39,12 +33,11 @@ public class JavaWebTutorialApplicationTests {
 
     @Test
     public void getUserByNameTest() {
-        String url = USER_BASE_URL + "/getUserByName?name=jack";
-        String jsonString = httpUtil.get(url);
+        String jsonString = httpUtil.get(USER_BASE_URL + "/getUserByName?name=jack");
         System.out.println(jsonString);
         List<Map<String, Object>> list = JsonUtil.parseString(jsonString);
         for (Map<String, Object> m : list) {
-            UserModal user = convertMapToUser(m);
+            UserModal user = MapUtil.convertMap(m, UserModal.class);
             checkUserInfoNull(user);
         }
     }
