@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import cn.jc.javawebtutorial.modal.UserModal;
-// import cn.jc.javawebtutorial.repository.UserRepository;
 import cn.jc.javawebtutorial.service.UserInfoService;
 
 
@@ -18,9 +17,6 @@ public class UserInfoController {
 
     @Autowired
     private UserInfoService userInfoService;
-
-    // @Autowired
-    // private UserRepository userRepository;
 
     @RequestMapping(value = "/getUserByName", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -48,11 +44,7 @@ public class UserInfoController {
     public String addUser(@RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "age", required = true) Integer age,
             @RequestParam(value = "gender", required = true) Boolean gender) {
-        UserModal user = new UserModal();
-        user.setAge(age);
-        user.setName(name);
-        user.setGender(gender);
-        UserModal userNew = userInfoService.addUser(user);
-        return JSON.toJSONString(userNew);
+        UserModal user = userInfoService.addUser(new UserModal(name, age, gender));
+        return JSON.toJSONString(user);
     }
 }

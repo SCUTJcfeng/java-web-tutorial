@@ -13,6 +13,16 @@ import lombok.Data;
 @Table(name = "test_user")
 @Data
 public class UserModal {
+
+    public UserModal() {
+    }
+
+    public UserModal(String name, Integer age, Boolean gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
