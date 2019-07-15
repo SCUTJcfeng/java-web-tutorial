@@ -52,23 +52,32 @@ public class JavaWebTutorialApplicationTests {
     public void httpUtilTest() {
         String name = "jack";
         Integer age = 18;
-        String result = httpUtil.get(TEST_GET_URL + "?name={name}&age={age}", name, age);
-        System.out.println(result);
-
         Map<String, Object> map = new HashMap<>();
         map.put("name", name);
         map.put("age", age);
-        String result2 = httpUtil.get(TEST_GET_URL + "?name={name}&age={age}", map);
-        System.out.println(result2);
-
-        String result3 = httpUtil.get(TEST_GET_URL + "?name={name}&age={age}", null, map);
-        System.out.println(result3);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "test_user_agent");
-        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(headers);
-        String result4 = httpUtil.get(TEST_GET_URL + "?name={name}&age={age}", requestEntity, map);
-        System.out.println(result4);
+        HttpEntity<Map<String, ?>> requestGetEntity = new HttpEntity<>(headers);
+        HttpEntity<Map<String, ?>> requestPostEntity = new HttpEntity<>(map, headers);
+
+        System.out.println(httpUtil.get(TEST_GET_URL));
+        System.out.println(httpUtil.get(TEST_GET_URL + "?name={name}&age={age}", name, age));
+        System.out.println(httpUtil.get(TEST_GET_URL + "?name={name}&age={age}", map));
+        System.out.println(httpUtil.get(TEST_GET_URL, requestGetEntity));
+        System.out.println(
+                httpUtil.get(TEST_GET_URL + "?name={name}&age={age}", requestGetEntity, name, age));
+        System.out.println(
+                httpUtil.get(TEST_GET_URL + "?name={name}&age={age}", requestGetEntity, map));
+
+        System.out.println(httpUtil.post(TEST_POST_URL));
+        System.out.println(httpUtil.post(TEST_POST_URL + "?name={name}&age={age}", name, age));
+        System.out.println(httpUtil.post(TEST_POST_URL + "?name={name}&age={age}", map));
+        System.out.println(httpUtil.post(TEST_POST_URL, requestPostEntity));
+        System.out.println(httpUtil.post(TEST_POST_URL + "?name={name}&age={age}",
+                requestPostEntity, name, age));
+        System.out.println(
+                httpUtil.post(TEST_POST_URL + "?name={name}&age={age}", requestPostEntity, map));
     }
 
 }
