@@ -21,9 +21,12 @@ public class UserInfoController {
 
     @RequestMapping(value = "/getUserByName", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String getUserByName(@RequestParam(value = "name", required = true) String name) {
+    // public String getUserByName(@RequestParam(value = "name", required = true) String name) {
+    public List<UserModal> getUserByName(
+            @RequestParam(value = "name", required = true) String name) {
         List<UserModal> list = userInfoService.getUserByName(name);
-        return JSON.toJSONString(list);
+        // return JSON.toJSONString(list);
+        return list;
     }
 
     @RequestMapping(value = "/getUserByGender", method = RequestMethod.GET,

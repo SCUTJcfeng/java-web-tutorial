@@ -1,5 +1,6 @@
 package cn.jc.javawebtutorial.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +16,7 @@ public class UserController {
     private UserDaoImpl userDaoImpl;
 
     @RequestMapping(value = "/query", method = RequestMethod.GET)
-    public UserModal queryUser(@RequestParam(value = "name", required = true) String name) {
+    public List<UserModal> queryUser(@RequestParam(value = "name", required = true) String name) {
         return userDaoImpl.selectUserByName(name);
     }
 
