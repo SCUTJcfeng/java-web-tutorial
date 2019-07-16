@@ -62,7 +62,7 @@ class VipUser implements Serializable {
 
 
 @RestController
-public class UserController {
+public class TempUserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
