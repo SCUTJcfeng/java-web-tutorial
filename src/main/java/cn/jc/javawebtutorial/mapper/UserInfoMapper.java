@@ -7,4 +7,6 @@ public interface UserInfoMapper {
     int insert(UserInfo record);
 
     List<UserInfo> selectAll();
+
+    UserInfo selectById(Integer id);
 }

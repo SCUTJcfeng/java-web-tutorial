@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import cn.jc.javawebtutorial.mapper.UserInfoMapper;
+import cn.jc.javawebtutorial.modal.UserInfo;
 import cn.jc.javawebtutorial.modal.UserModal;
 import cn.jc.javawebtutorial.service.impl.UserDaoImpl;
 
@@ -15,9 +17,17 @@ public class UserController {
     @Autowired
     private UserDaoImpl userDaoImpl;
 
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     public List<UserModal> queryUser(@RequestParam(value = "name", required = true) String name) {
         return userDaoImpl.selectUserByName(name);
+    }
+
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public UserInfo getUser(@RequestParam(value = "id", required = true) Integer id) {
+        return userInfoMapper.selectById(id);
     }
 
 }

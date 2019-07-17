@@ -26,3 +26,6 @@ spring:
         min-idle: 8
         max-idle: 32
         max-wait: -1
+mybatis:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: cn.jc.springdemo
