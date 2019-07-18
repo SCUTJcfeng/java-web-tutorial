@@ -1,6 +1,6 @@
 package cn.jc.javawebtutorial.temp;
 
-import java.io.Serializable;
+// import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-class VipUser implements Serializable {
+class VipUser {
 
     @JSONField(name = "name")
     private String name;
@@ -21,7 +21,7 @@ class VipUser implements Serializable {
 
     @JSONField(serialize = false)
     private Map<String, Object> map = new HashMap<>();
-    private static final long serialVersionUID = 1L;
+    // private static final long serialVersionUID = 1L;
 
     public VipUser(String name, Integer age) {
         this.name = name;
