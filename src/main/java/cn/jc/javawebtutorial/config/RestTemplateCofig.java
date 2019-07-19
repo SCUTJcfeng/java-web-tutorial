@@ -1,6 +1,7 @@
 package cn.jc.javawebtutorial.config;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -19,13 +20,13 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class RestTemplateCofig {
 
-    private static final String CHARSET = "utf-8";
+    private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
     private static final Integer READ_TIMEOUT = 15000;
     private static final Integer CONNECT_TIMEOUT = 15000;
 
     @Bean
-    public RestTemplate restTemplate(ClientHttpRequestFactory factory) {
-        RestTemplate resteTemplate = new RestTemplate(factory);
+    public RestTemplate restTemplate() {
+        RestTemplate resteTemplate = new RestTemplate(simpleClientHttpRequestFactory());
         List<HttpMessageConverter<?>> converters = resteTemplate.getMessageConverters();
         Iterator<HttpMessageConverter<?>> iterator = converters.iterator();
         while (iterator.hasNext()) {
@@ -42,7 +43,7 @@ public class RestTemplateCofig {
     }
 
     private StringHttpMessageConverter getStringHttpMessageConverter() {
-        return new StringHttpMessageConverter(Charset.forName(CHARSET));
+        return new StringHttpMessageConverter(DEFAULT_CHARSET);
     }
 
     private FastJsonHttpMessageConverter getFastJsonHttpMessageConverter() {
@@ -53,13 +54,12 @@ public class RestTemplateCofig {
                 SerializerFeature.WriteNullNumberAsZero, SerializerFeature.WriteNullBooleanAsFalse,
                 SerializerFeature.DisableCircularReferenceDetect);
         fastJsonConverter.setFastJsonConfig(fastJsonConfig);
-        fastJsonConverter.setDefaultCharset(Charset.forName(CHARSET));
+        fastJsonConverter.setDefaultCharset(DEFAULT_CHARSET);
         fastJsonConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON_UTF8));
         return fastJsonConverter;
     }
 
-    @Bean
-    public ClientHttpRequestFactory simpleClientHttpRequestFactory() {
+    private ClientHttpRequestFactory simpleClientHttpRequestFactory() {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         factory.setReadTimeout(READ_TIMEOUT);
         factory.setConnectTimeout(CONNECT_TIMEOUT);
