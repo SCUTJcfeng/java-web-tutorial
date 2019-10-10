@@ -19,16 +19,19 @@ public class GatewayConfig implements InitializingBean, ApplicationContextAware 
 
     private ApplicationContext context;
 
+    /**
+     * Bean属性初始化后执行
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
-      log.info("【GatewayConfig】 afterPropertiesSet");
+      log.info("【GatewayConfig】afterPropertiesSet");
       String[] beanNames = context.getBeanDefinitionNames();
       for (String beanName : beanNames) {
           Class<?> type = context.getType(beanName);
           for (Method m : type.getDeclaredMethods()) {
               Login login = AnnotationUtils.findAnnotation(m, Login.class);
               if (login != null) {
-                  log.info("【GatewayConfig】Find Login: " + login.value());
+                  log.info("【GatewayConfig】Find Login in method: " + m.getName());
               }
           }
       }
@@ -36,7 +39,7 @@ public class GatewayConfig implements InitializingBean, ApplicationContextAware 
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        log.info("【GatewayConfig】 setApplicationContext");
+        log.info("【GatewayConfig】setApplicationContext");
         context = applicationContext;
     }
 }
